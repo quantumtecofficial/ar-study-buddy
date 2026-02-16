@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Online</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="hologram-container" id="hologram-container">
+            <!-- Three.js Canvas will be here -->
+        </div>
+        <div class="hex-grid"></div>
+        <video id="ar-video" autoplay playsinline
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
+
+        <div class="ui-layer">
+            <div class="header">
+                <h1>JARVIS <span class="status-dot"></span></h1>
+                <div class="time" id="clock">00:00</div>
+                <div id="pomodoro-timer"
+                    style="display: none; font-family: 'Orbitron'; font-size: 1.5rem; color: #ff0055; margin-left: 20px;">
+                    25:00
+                </div>
+                <div class="weather-widget"
+                    style="margin-left: auto; font-family: 'Rajdhani'; color: var(--primary-color); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span id="weather-temp">24°C</span>
+                    <span id="weather-desc" style="font-size: 0.8rem; opacity: 0.8;">Clear Sky</span>
+                </div>
+            </div>
+
+            <div class="main-display">
+                <div class="text-output" id="text-output">
+                    <p class="jarvis-text">System Online. Waiting for command...</p>
+                </div>
+                <div class="user-input-display" id="user-input-display">
+                    <!-- User speech text appears here -->
+                </div>
+            </div>
+
+            <div class="panels">
+                <div class="panel left-panel">
+                    <h3>System Status</h3>
+                    <div class="stat-row">
+                        <span>CPU</span>
+                        <div class="bar">
+                            <div class="fill" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span>Memory</span>
+                        <div class="bar">
+                            <div class="fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <span>Network</span>
+                        <div class="bar">
+                            <div class="fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel right-panel" id="info-panel">
+                    <h3>Information</h3>
+                    <div class="content" id="info-content">
+                        No active data.
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="input-area">
+                    <button id="mic-btn" class="control-btn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="ar-btn" class="control-btn" title="Toggle AR Mode">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <input type="text" id="command-input" placeholder="Type a command...">
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <button onclick="speak('Voice check. Systems nominal.')" class="text-btn">Test Voice</button>
+                </div>
+            </div>
+
+            <div class="news-ticker"
+                style="position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.5); padding: 5px 20px; font-family: 'Rajdhani'; font-size: 0.9rem; color: var(--text-color); border-top: 1px solid rgba(0, 243, 255, 0.2); white-space: nowrap; overflow: hidden;">
+                <div id="news-content" style="display: inline-block; animation: ticker 20s linear infinite;">
+                    System Online | Waiting for input | Connected to Neural Network | Weather: Optimal | Battery: 100% |
+                    Security: Active
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="avatar.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
