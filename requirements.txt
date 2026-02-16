@@ -1,0 +1,12 @@
+flask
+flask-socketio
+simple-websocket
+requests
+duckduckgo-search
+beautifulsoup4
+groq
+wikipedia
+openai
+gunicorn
+SpeechRecognition
+pyttsx3
